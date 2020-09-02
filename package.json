@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/photonstorm/phaser3-project-template#readme",
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "phaser": "^3.3.0",
     "raw-loader": "^0.5.1",
