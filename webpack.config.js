@@ -9,9 +9,8 @@ module.exports = {
     entry: './src/index.js',
 
     output: {
-        path: path.resolve(__dirname, 'build'),
-        publicPath: '/build/',
-        filename: 'project.bundle.js'
+        filename: 'project.bundle.js',
+        path: path.resolve(__dirname, 'build')
     },
 
     module: {
@@ -32,17 +31,24 @@ module.exports = {
           }
         ]
     },
+    
+    devServer: {
+        contentBase: path.resolve(__dirname, 'build'),
+        writeToDisk: true
+    },
 
     plugins: [
         new CopyPlugin({
             patterns: [
-              { from: path.resolve(__dirname, 'index.html'), to: path.resolve(__dirname, 'build') }
+              { from: path.resolve(__dirname, 'index.html'), to: path.resolve(__dirname, 'build') },
+              { from: 'assets/**/*',
+                to: path.resolve(__dirname, 'build')
+              }
             ],
         }),
         new webpack.DefinePlugin({
-            'CANVAS_RENDERER': JSON.stringify(true),
-            'WEBGL_RENDERER': JSON.stringify(true)
+            'typeof CANVAS_RENDERER': JSON.stringify(true),
+            'typeof WEBGL_RENDERER': JSON.stringify(true)
         }),
     ]
-
 };
