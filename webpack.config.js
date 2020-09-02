@@ -2,9 +2,10 @@
 
 const webpack = require('webpack');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-
+    mode: 'development',
     entry: './src/index.js',
 
     output: {
@@ -33,10 +34,15 @@ module.exports = {
     },
 
     plugins: [
+        new CopyPlugin({
+            patterns: [
+              { from: path.resolve(__dirname, 'index.html'), to: path.resolve(__dirname, 'build') }
+            ],
+        }),
         new webpack.DefinePlugin({
             'CANVAS_RENDERER': JSON.stringify(true),
             'WEBGL_RENDERER': JSON.stringify(true)
-        })
+        }),
     ]
 
 };
