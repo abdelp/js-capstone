@@ -2,4 +2,5 @@ node_modules/
 firebase-debug.log
 .firebaserc
 firebase.json
-project.bundle.js
+build/
+.firebase
