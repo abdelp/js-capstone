@@ -22,6 +22,7 @@
     "@babel/preset-env": "^7.11.5",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.1.0",
+    "jest": "^26.4.2",
     "phaser": "^3.3.0",
     "raw-loader": "^4.0.1",
     "webpack": "^4.44.1",
