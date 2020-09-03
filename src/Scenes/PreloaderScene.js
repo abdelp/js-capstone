@@ -9,9 +9,15 @@ export default class PreloaderScene extends Phaser.Scene {
     this.readyCount = 0;
   }
 
-  loadAssets (arr) {
+  loadAssets(arr) {
     for (let i = 0; i < arr.length; i++) {
       this.load[arr[i].type](arr[i].key, arr[i].path, arr[i].opts);
+    }
+  }
+
+  destroyObjs(arr) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].destroy();
     }
   }
 
@@ -70,11 +76,8 @@ export default class PreloaderScene extends Phaser.Scene {
     });
 
     this.load.on('complete', function () {
-      progressBar.destroy();
-      progressBox.destroy();
-      loadingText.destroy();
-      percentText.destroy();
-      assetText.destroy();
+      const objects = [ progressBar, progressBox, loadingText, percentText, assetText ];
+      this.destroyObjs(objects);
       this.ready();
     }.bind(this));
 
