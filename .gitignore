@@ -5,3 +5,4 @@ firebase.json
 build/
 .firebase
 .package-lock.json
+.vscode
