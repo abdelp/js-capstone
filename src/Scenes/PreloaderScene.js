@@ -53,17 +53,6 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     percentText.setOrigin(0.5, 0.5);
 
-    const assetText = this.make.text({
-      x: width / 2,
-      y: height / 2 + 50,
-      text: '',
-      style: {
-        font: '18px monospace',
-        fill: '#ffffff'
-      }
-    });
-    assetText.setOrigin(0.5, 0.5);
-
     this.load.on('progress', function (value) {
       percentText.setText(parseInt(value * 100) + '%');
       progressBar.clear();
@@ -71,12 +60,8 @@ export default class PreloaderScene extends Phaser.Scene {
       progressBar.fillRect(250, 280, 300 * value, 30);
     });
 
-    this.load.on('fileprogress', function (file) {
-      assetText.setText('Loading asset: ' + file.key);
-    });
-
     this.load.on('complete', function () {
-      const objects = [ progressBar, progressBox, loadingText, percentText, assetText ];
+      const objects = [ progressBar, progressBox, loadingText, percentText ];
       this.destroyObjs(objects);
       this.ready();
     }.bind(this));
@@ -96,10 +81,7 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready () {
-    this.scene.start('Title');
     this.readyCount++;
-    if (this.readyCount === 2) {
-      this.scene.start('Title');
-    }
+    if (this.readyCount === 2) this.scene.start('Title');
   }
 };
