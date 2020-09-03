@@ -6,3 +6,4 @@ build/
 .firebase
 .package-lock.json
 .vscode
+assets/bkp
