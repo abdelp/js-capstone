@@ -60,6 +60,8 @@ export default class GameScene extends Phaser.Scene {
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
     const grass = map.createStaticLayer('Grass', tiles, 0, 0);
     const decorations = map.createStaticLayer('Decorations', tiles, 0, 0);
+    // const enemies = map.filterObjects('Enemies', (enemy) => console.log(enemy));
+    const enemies = map.objects[0].objects;
     let obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
 
     obstacles.setCollisionByExclusion([-1]);
@@ -99,7 +101,7 @@ export default class GameScene extends Phaser.Scene {
     ];
 
     this.createAnims(anims);
-    this.player = this.physics.add.sprite(50, 100, 'player', 6);
+    this.player = this.physics.add.sprite(25, 250, 'player', 6);
 
     this.physics.world.bounds.width = map.widthInPixels;
     this.physics.world.bounds.height = map.heightInPixels;
@@ -107,7 +109,6 @@ export default class GameScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player, obstacles);
 
-    // limit camera to map
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = true; // avoid tile bleed
@@ -120,10 +121,8 @@ export default class GameScene extends Phaser.Scene {
       classType: Phaser.GameObjects.Zone
     });
 
-    for (var i = 0; i < 30; i++) {
-      var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-      var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-      this.spawns.create(x, y, 20, 20);
+    for (var i = 0; i < enemies.length; i++) {
+      this.spawns.create(enemies[i].x, enemies[i].y, 20, 20);
     }
 
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
@@ -142,7 +141,7 @@ export default class GameScene extends Phaser.Scene {
     zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
     zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
 
-    // this.cameras.main.shake(300);
+    this.cameras.main.shake(200);
 
     this.input.stopPropagation();
     this.scene.switch('BattleScene');
