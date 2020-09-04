@@ -116,7 +116,6 @@ export default class GameScene extends Phaser.Scene {
     
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    // where the enemies will be
     this.spawns = this.physics.add.group({
       classType: Phaser.GameObjects.Zone
     });
@@ -138,9 +137,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   onMeetEnemy(player, zone) {
-    zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-    zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
-
     this.cameras.main.shake(200);
 
     this.input.stopPropagation();
