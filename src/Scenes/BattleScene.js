@@ -1,4 +1,6 @@
 import 'phaser';
+import PlayerCharacter from './../Objects/PlayerCharacter';
+import Enemy from './../Objects/Enemy';
 
 export default class BattleScene extends Phaser.Scene {
   constructor() {
@@ -13,30 +15,29 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   startBattle() {
-    // player character - warrior
-    var warrior = new PlayerCharacter(this, 250, 50, "player", 1, "Warrior", 100, 20);        
+    var warrior = new PlayerCharacter(this, 250, 80, "player", 1, "Aragorn", 100, 20);        
     this.add.existing(warrior);
     
     // player character - mage
-    var mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
-    this.add.existing(mage);            
-    
-    var dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
-    this.add.existing(dragonblue);
-    
-    var dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 50, 3);
-    this.add.existing(dragonOrange);
+    // var mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
+    // this.add.existing(mage);            
+
+    const ork = new Enemy(this, 80, 80, "ork", null, "Ork", 50, 3);
+    this.add.existing(ork);
+
+    // var dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 50, 3);
+    // this.add.existing(dragonOrange);
     
     // array with heroes
-    this.heroes = [ warrior, mage ];
+    this.heroes = [ warrior ];
     // array with enemies
-    this.enemies = [ dragonblue, dragonOrange ];
+    this.enemies = [ ork ];
     // array with both parties, who will attack
     this.units = this.heroes.concat(this.enemies);
-    
+
     this.index = -1; // currently active unit
-    
-    this.scene.run("UIScene");        
+
+    this.scene.run("UIScene");
   }
 
   nextTurn() {  
@@ -71,18 +72,9 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   checkEndBattle() {        
-    var victory = true;
-    // if all enemies are dead we have victory
-    for(var i = 0; i < this.enemies.length; i++) {
-        if(this.enemies[i].living)
-            victory = false;
-    }
-    var gameOver = true;
-    // if all heroes are dead we have game over
-    for(var i = 0; i < this.heroes.length; i++) {
-        if(this.heroes[i].living)
-            gameOver = false;
-    }
+    let victory = !this.enemies.some(enemy => enemy.living);
+    let gameOver = !this.heroes.some(heroe => heroe.living);
+
     return victory || gameOver;
   }
 

@@ -29,8 +29,8 @@ export default class GameScene extends Phaser.Scene {
         type: 'tilemapTiledJSON'
       },
       {
-        name: 'dragonblue',
-        path: 'assets/dragonblue.png',
+        name: 'ork',
+        path: 'assets/ork.png',
         type: 'image'
       },
       {

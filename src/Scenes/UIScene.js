@@ -1,7 +1,8 @@
 import 'phaser';
-import './../Objects/HeroesMenu';
-import './../Objects/ActionsMenu';
-import './../Objects/EnemiesMenu';
+import HeroesMenu from './../Objects/HeroesMenu';
+import ActionsMenu from './../Objects/ActionsMenu';
+import EnemiesMenu from './../Objects/EnemiesMenu';
+import Message from './../Objects/Message';
 
 export default class UIScene extends Phaser.Scene {
 
