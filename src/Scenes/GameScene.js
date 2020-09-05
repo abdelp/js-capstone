@@ -136,9 +136,11 @@ export default class GameScene extends Phaser.Scene {
   }
 
   onMeetEnemy(player, zone) {
+    zone.destroy();
     this.cameras.main.shake(200);
 
     this.input.stopPropagation();
+
     this.scene.switch('BattleScene');
   }
 
