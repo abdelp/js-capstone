@@ -7,6 +7,7 @@ import PreloaderScene from './Scenes/PreloaderScene';
 import TitleScene from './Scenes/TitleScene';
 import OptionsScene from './Scenes/OptionsScene';
 import CreditsScene from './Scenes/CreditsScene';
+import UIScene from './Scenes/UIScene';
 import Model from './Model';
 
 class Game extends Phaser.Game {
@@ -21,7 +22,8 @@ class Game extends Phaser.Game {
       { key: 'Options', sceneConfig: OptionsScene},
       { key: 'Credits', sceneConfig: CreditsScene},
       { key: 'Game', sceneConfig: GameScene},
-      { key: 'Battle', sceneConfig: BattleScene}
+      { key: 'Battle', sceneConfig: BattleScene},
+      { key: 'UIScene', sceneConfig: UIScene}
     ];
     this.addScenes(scenes);
     this.scene.start('Boot');
