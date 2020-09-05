@@ -1,6 +1,7 @@
 import 'phaser';
 import PlayerCharacter from './../Objects/PlayerCharacter';
 import Enemy from './../Objects/Enemy';
+import destroyObjs from './../Objects/Utilities';
 
 export default class BattleScene extends Phaser.Scene {
   constructor() {
@@ -40,34 +41,27 @@ export default class BattleScene extends Phaser.Scene {
     this.scene.run("UIScene");
   }
 
-  nextTurn() {  
-    // if we have victory or game over
+  nextTurn() {
     if(this.checkEndBattle()) {           
-        this.endBattle();
-        return;
+      this.endBattle();
+      return;
     }
+
     do {
-        // currently active unit
-        this.index++;
-        // if there are no more units, we start again from the first one
-        if(this.index >= this.units.length) {
-            this.index = 0;
-        }            
+      this.index++;
+      if(this.index >= this.units.length) this.index = 0;
     } while(!this.units[this.index].living);
-    // if its player hero
+
     if(this.units[this.index] instanceof PlayerCharacter) {
-        // we need the player to select action and then enemy
-        this.events.emit("PlayerSelect", this.index);
-    } else { // else if its enemy unit
-        // pick random living hero to be attacked
-        var r;
-        do {
-            r = Math.floor(Math.random() * this.heroes.length);
-        } while(!this.heroes[r].living) 
-        // call the enemy's attack function 
-        this.units[this.index].attack(this.heroes[r]);  
-        // add timer for the next turn, so will have smooth gameplay
-        this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+      this.events.emit("PlayerSelect", this.index);
+    } else {
+      let r;
+      do {
+        r = Math.floor(Math.random() * this.heroes.length);
+      } while(!this.heroes[r].living);
+
+      this.units[this.index].attack(this.heroes[r]);  
+      this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
   }
 
@@ -86,18 +80,12 @@ export default class BattleScene extends Phaser.Scene {
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });        
   }
 
-  endBattle() {       
-    // clear state, remove sprites
+  endBattle() {
     this.heroes.length = 0;
     this.enemies.length = 0;
-    for(var i = 0; i < this.units.length; i++) {
-        // link item
-        this.units[i].destroy();            
-    }
+    destroyObjs(this.units);
     this.units.length = 0;
-    // sleep the UI
     this.scene.sleep('UIScene');
-    // return to WorldScene and sleep current BattleScene
-    this.scene.switch('WorldScene');
+    this.scene.switch('Game');
   }
 }
