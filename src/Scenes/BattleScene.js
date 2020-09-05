@@ -16,27 +16,22 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   startBattle() {
-    let warrior = new PlayerCharacter(this, 250, 80, "player", 1, "Aragorn", 100, 20);        
-    this.add.existing(warrior);
-    
-    // player character - mage
-    // var mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
-    // this.add.existing(mage);            
+    let aragorn = new PlayerCharacter(this, 80, 80, "player", 1, "Aragorn", 100, 20);        
+    this.add.existing(aragorn);
 
-    const ork = new Enemy(this, 80, 80, "ork", null, "Ork", 50, 3);
+    let legolas = new PlayerCharacter(this, 80, 150, "player", 4, "Legolas", 80, 8);
+    this.add.existing(legolas);            
+
+    let gimli = new PlayerCharacter(this, 80, 220, "player", 4, "Gimli", 80, 8);
+    this.add.existing(legolas);  
+
+    const ork = new Enemy(this, 250, 80, "ork", null, "Ork", 50, 3);
     this.add.existing(ork);
 
-    // var dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null,"Dragon2", 50, 3);
-    // this.add.existing(dragonOrange);
-    
-    // array with heroes
-    this.heroes = [ warrior ];
-    // array with enemies
+    this.heroes = [ aragorn, legolas, gimli ];
     this.enemies = [ ork ];
-    // array with both parties, who will attack
     this.units = this.heroes.concat(this.enemies);
-
-    this.index = -1; // currently active unit
+    this.index = -1;
 
     this.scene.run("UIScene");
   }
@@ -75,6 +70,8 @@ export default class BattleScene extends Phaser.Scene {
   receivePlayerSelection(action, target) {
     if (action === 'attack') {            
       this.units[this.index].attack(this.enemies[target]);              
+    } else if (action === 'heal') {
+      this.units[this.index].heal(this.heroes[target]);
     }
 
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });        
