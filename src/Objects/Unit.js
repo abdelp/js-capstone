@@ -7,8 +7,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
     this.type = type;
     this.maxHp = this.hp = hp;
-    this.damage = damage;    
-    this.living = true;         
+    this.damage = damage;
+    this.living = true;
     this.menuItem = null;
   }
 
