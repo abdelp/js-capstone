@@ -2,8 +2,8 @@ import 'phaser';
 import MenuItem from './MenuItem';
 
 export default class Menu extends Phaser.GameObjects.Container {
-  
-  constructor(x, y, scene, heroes) {
+
+  constructor(x, y, scene) {
     super(scene, x, y);
     this.menuItems = [];
     this.menuItemIndex = 0;
@@ -11,9 +11,9 @@ export default class Menu extends Phaser.GameObjects.Container {
     this.y = y;        
     this.selected = false;
   }
- 
+
   addMenuItem(unit) {
-    var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
+    let menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
     this.menuItems.push(menuItem);
     this.add(menuItem); 
     return menuItem;
@@ -62,7 +62,7 @@ export default class Menu extends Phaser.GameObjects.Container {
   }
 
   confirm() {
-      // when the player confirms his slection, do the action
+    this.scene.events.emit("SelectedAction", this.menuItemIndex);
   }
 
   clear() {
