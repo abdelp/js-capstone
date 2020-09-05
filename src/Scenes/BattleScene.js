@@ -1,7 +1,7 @@
 import 'phaser';
 import PlayerCharacter from './../Objects/PlayerCharacter';
 import Enemy from './../Objects/Enemy';
-import destroyObjs from './../Objects/Utilities';
+import { destroyObjs } from './../Objects/Utilities';
 
 export default class BattleScene extends Phaser.Scene {
   constructor() {
@@ -16,7 +16,7 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   startBattle() {
-    var warrior = new PlayerCharacter(this, 250, 80, "player", 1, "Aragorn", 100, 20);        
+    let warrior = new PlayerCharacter(this, 250, 80, "player", 1, "Aragorn", 100, 20);        
     this.add.existing(warrior);
     
     // player character - mage
@@ -73,10 +73,10 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   receivePlayerSelection(action, target) {
-    if (action == "attack") {            
-        this.units[this.index].attack(this.enemies[target]);              
+    if (action === 'attack') {            
+      this.units[this.index].attack(this.enemies[target]);              
     }
-    // next turn in 3 seconds
+
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });        
   }
 

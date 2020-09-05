@@ -2,20 +2,15 @@ import 'phaser';
 import config from './Config/config';
 import scenes from './Config/scenes';
 import Model from './Model';
+import { addScenes } from './Objects/Utilities';
 
 class Game extends Phaser.Game {
   constructor () {
     super(config);
     const model = new Model();
     this.globals = { model, bgMusic: null };
-    this.addScenes(scenes);
+    addScenes(this, scenes);
     this.scene.start('Boot');
-  }
-
-  addScenes(arr) {
-    for(let i = 0; i < arr.length; i += 1) {
-      this.scene.add(arr[i].key, arr[i].sceneConfig);
-    }
   }
 }
 

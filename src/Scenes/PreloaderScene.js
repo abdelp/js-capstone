@@ -1,5 +1,5 @@
 import 'phaser';
-import destroyObjs from './../Objects/Utilities';
+import { destroyObjs, loadAssets } from './../Objects/Utilities';
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor () {
@@ -8,12 +8,6 @@ export default class PreloaderScene extends Phaser.Scene {
 
   init () {
     this.readyCount = 0;
-  }
-
-  loadAssets(arr) {
-    for (let i = 0; i < arr.length; i++) {
-      this.load[arr[i].type](arr[i].key, arr[i].path, arr[i].opts);
-    }
   }
 
   preload () {
@@ -72,7 +66,7 @@ export default class PreloaderScene extends Phaser.Scene {
       {key: 'bgMusic', path: ['assets/TownTheme.mp3'], type: 'audio'}
     ];
 
-    this.loadAssets(assets);
+    loadAssets(this, assets);
   }
 
   ready () {

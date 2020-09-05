@@ -1,45 +1,34 @@
 import 'phaser';
+import { loadAssets, createAnims } from './../Objects/Utilities';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
   }
 
-  loadAssets(arr) {
-    for (let i = 0; i < arr.length; i++) {
-      this.load[arr[i].type](arr[i].name, arr[i].path, arr[i].opts);
-    }
-  }
-
-  createAnims(arr) {
-    for (let i = 0; i < arr.length; i += 1) {
-      this.anims.create(arr[i]);
-    }
-  }
-
   preload() {
     const assets = [{
-        name: 'tiles',
+        key: 'tiles',
         path: 'assets/map/spritesheet.png',
         type: 'image'
       },
       {
-        name: 'map',
+        key: 'map',
         path: 'assets/map/map.json',
         type: 'tilemapTiledJSON'
       },
       {
-        name: 'ork',
+        key: 'ork',
         path: 'assets/ork.png',
         type: 'image'
       },
       {
-        name: 'dragonorrange',
+        key: 'dragonorrange',
         path: 'assets/dragonorrange.png',
         type: 'image'
       },
       {
-        name: 'player',
+        key: 'player',
         path: 'assets/RPG_assets.png',
         opts: {
           frameWidth: 32,
@@ -49,7 +38,7 @@ export default class GameScene extends Phaser.Scene {
       }
     ];
 
-    this.loadAssets(assets);
+    loadAssets(this, assets);
   }
 
   create() {
@@ -99,7 +88,7 @@ export default class GameScene extends Phaser.Scene {
       }
     ];
 
-    this.createAnims(anims);
+    createAnims(this, anims);
     this.player = this.physics.add.sprite(25, 250, 'player', 6);
 
     this.physics.world.bounds.width = map.widthInPixels;
