@@ -41,11 +41,12 @@ export default class UIScene extends Phaser.Scene {
 
     this.input.keyboard.on("keydown", this.onKeyInput, this);
     this.events.on("SelectedAction", this.onSelectedAction, this);
+    this.battleScene.events.on("PlayerTurn", this.onPlayerTurn, this);
 
     this.sys.events.on('wake', this.createMenu, this);
 
     this.message = new Message(this, this.battleScene.events);
-    this.add.existing(this.message);        
+    this.add.existing(this.message);
     
     this.createMenu();
     this.currentMenu = this.heroesMenu;
@@ -65,6 +66,11 @@ export default class UIScene extends Phaser.Scene {
     this.enemiesMenu.deselect();
     this.currentMenu = null;
     this.battleScene.receivePlayerSelection("attack", index);   
+  }
+
+  onPlayerTurn() {
+    this.heroesMenu.select(0);
+    this.currentMenu = this.heroesMenu;
   }
 
   onSelectedAction(index) {
