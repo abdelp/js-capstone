@@ -35,6 +35,15 @@ export default class GameScene extends Phaser.Scene {
           frameHeight: 32
         },
         type: 'spritesheet'
+      },
+      {
+        key: 'life',
+        path: 'assets/life.png',
+        opts: {
+          frameWidth: 214,
+          frameHeight: 28
+        },
+        type: 'spritesheet'
       }
     ];
 
