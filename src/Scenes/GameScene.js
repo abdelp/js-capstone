@@ -58,10 +58,13 @@ export default class GameScene extends Phaser.Scene {
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
     const grass = map.createStaticLayer('Grass', tiles, 0, 0);
     const decorations = map.createStaticLayer('Decorations', tiles, 0, 0);
+    this.food = map.createDynamicLayer('Food', tiles, 0, 0);
+
     const enemies = map.objects[0].objects;
-    let obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
+    let obstacles = map.createDynamicLayer('Obstacles', tiles, 0, 0);
 
     obstacles.setCollisionByExclusion([-1]);
+    this.food.setCollisionByExclusion([-1]);
 
     const anims = [{
         key: 'left',
@@ -108,7 +111,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.cameras.main.startFollow(this.player);
-    this.cameras.main.roundPixels = true; // avoid tile bleed
+    this.cameras.main.roundPixels = true;
     this.cameras.main.setZoom(2);
     
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -117,13 +120,30 @@ export default class GameScene extends Phaser.Scene {
       classType: Phaser.GameObjects.Zone
     });
 
-    for (var i = 0; i < enemies.length; i++) {
+    this.collect = this.physics.add.group({
+      classType: Phaser.GameObjects.Zone
+    });
+
+    for (let i = 0; i < enemies.length; i++) {
       this.spawns.create(enemies[i].x, enemies[i].y, 20, 20);
     }
+
+    this.physics.add.collider(this.player, this.food, this.collectFood, false, this);
+
 
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
 
     this.sys.events.on('wake', this.wake, this);
+  }
+
+  collectFood(_player, food2) {
+    this.food.removeTileAt(food2.x - 1, food2.y + 1);
+    this.food.removeTileAt(food2.x - 1, food2.y - 1);
+    this.food.removeTileAt(food2.x - 1, food2.y);
+    this.food.removeTileAt(food2.x, food2.y);
+    this.food.removeTileAt(food2.x, food2.y + 1);
+    this.food.removeTileAt(food2.x + 1, food2.y);
+    this.food.removeTileAt(food2.x + 1, food2.y + 1);
   }
 
   wake() {
