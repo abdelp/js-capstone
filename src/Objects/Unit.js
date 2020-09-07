@@ -1,18 +1,16 @@
 import 'phaser';
+import HealthBar from './HealthBar';
 
 export default class Unit extends Phaser.GameObjects.Sprite {
 
   constructor(scene, x, y, texture, frame, type, hp, damage) {
     super(scene, x, y, texture, frame);
-
-    this.lifeSprite = this.scene.add.sprite(x, y - 70, 'life', 0);
     this.type = type;
     this.maxHp = this.hp = hp;
-    this.lifeText = this.scene.add.text(x - 90, y - 105, `${this.hp}/${this.maxHp}`);
-    this.lifeText.setOrigin(0, 0);
     this.damage = damage;
     this.living = true;
     this.menuItem = null;
+    this.hb = new HealthBar(scene, x - 40, y - 60, hp);
   }
 
   setMenuItem(item) {
@@ -33,8 +31,8 @@ export default class Unit extends Phaser.GameObjects.Sprite {
       this.visible = false;   
       this.menuItem = null;
     }
-    this.setLifeFrame(this.hp);
-    this.setLifeText();
+
+    this.hb.update(damage);
   }
 
   heal(target, hp) {
@@ -55,9 +53,5 @@ export default class Unit extends Phaser.GameObjects.Sprite {
     } else {
       this.lifeSprite.setFrame(0);
     }
-  }
-
-  setLifeText() {
-    this.lifeText.setText(`${this.hp}/${this.maxHp}`);
   }
 }
