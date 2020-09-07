@@ -7,3 +7,5 @@ build/
 .package-lock.json
 .vscode
 assets/bkp
+*.bkp*
+orc-sprite.png

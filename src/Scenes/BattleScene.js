@@ -16,19 +16,13 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   startBattle() {
-    let aragorn = new PlayerCharacter(this, 80, 80, "player", 1, "Aragorn", 100, 20);        
+    let aragorn = new PlayerCharacter(this, 150, 200, "player", 1, "Aragorn", 100, 20);        
     this.add.existing(aragorn);
 
-    let legolas = new PlayerCharacter(this, 80, 150, "player", 4, "Legolas", 80, 8);
-    this.add.existing(legolas);            
-
-    let gimli = new PlayerCharacter(this, 80, 220, "player", 4, "Gimli", 80, 8);
-    this.add.existing(legolas);  
-
-    const ork = new Enemy(this, 250, 80, "ork", null, "Ork", 50, 3);
+    const ork = new Enemy(this, 450, 200, "ork", null, "Ork", 50, 10);
     this.add.existing(ork);
 
-    this.heroes = [ aragorn, legolas, gimli ];
+    this.heroes = [ aragorn ];
     this.enemies = [ ork ];
     this.units = this.heroes.concat(this.enemies);
     this.index = -1;
@@ -48,7 +42,7 @@ export default class BattleScene extends Phaser.Scene {
     } while(!this.units[this.index].living);
 
     if(this.units[this.index] instanceof PlayerCharacter) {
-      this.events.emit("PlayerSelect", this.index);
+      this.events.emit("PlayerTurn", this.index);
     } else {
       let r;
       do {
