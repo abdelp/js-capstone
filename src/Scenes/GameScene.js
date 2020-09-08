@@ -57,7 +57,7 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.warrior = {hp: 100,
-                 medical_kits: 2};
+                 medicalKits: 2};
 
     const map = this.make.tilemap({
       key: 'map'
