@@ -14,10 +14,12 @@ export default class HealthBar {
     }
 
     update(amount) {
-        this.value -= amount;
+        this.value += amount;
 
         if (this.value < 0) {
             this.value = 0;
+        } else if (this.value > 100) {
+            this.value = 100;
         }
 
         this.draw();
