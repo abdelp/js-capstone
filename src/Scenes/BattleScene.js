@@ -11,15 +11,17 @@ export default class BattleScene extends Phaser.Scene {
   create()
   {
     this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
+    this.gameScene = this.scene.get("Game");
     this.startBattle();
     this.sys.events.on('wake', this.startBattle, this);             
   }
 
   startBattle() {
-    let aragorn = new PlayerCharacter(this, 150, 200, "player", 1, "Aragorn", 100, 20);        
+    let aragorn = new PlayerCharacter(this, 150, 200, "player", 1, "Aragorn", this.gameScene.warrior.hp, 20); 
+
     this.add.existing(aragorn);
 
-    const ork = new Enemy(this, 450, 200, "ork", null, "Ork", 50, 10);
+    const ork = new Enemy(this, 450, 200, "ork", null, "Ork", 100, 10);
     this.add.existing(ork);
 
     this.heroes = [ aragorn ];
@@ -49,7 +51,8 @@ export default class BattleScene extends Phaser.Scene {
         r = Math.floor(Math.random() * this.heroes.length);
       } while(!this.heroes[r].living);
 
-      this.units[this.index].attack(this.heroes[r]);  
+      this.units[this.index].attack(this.heroes[r]);
+      this.gameScene.events.emit('update health points', this.heroes[r].hp);
       this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
   }
