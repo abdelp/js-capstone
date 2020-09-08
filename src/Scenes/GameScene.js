@@ -37,7 +37,7 @@ export default class GameScene extends Phaser.Scene {
         type: 'spritesheet'
       },
       {
-        key: 'life',
+        key: 'life_bar',
         path: 'assets/life.png',
         opts: {
           frameWidth: 214,
@@ -48,9 +48,17 @@ export default class GameScene extends Phaser.Scene {
     ];
 
     loadAssets(this, assets);
+    this.sys.events.on('update health points', this.updateHealthPoints, this);
+  }
+
+  updateHealthPoints(points) {
+    this.warrior.hp = points;
   }
 
   create() {
+    this.warrior = {hp: 100,
+                 medical_kits: 2};
+
     const map = this.make.tilemap({
       key: 'map'
     });
@@ -137,8 +145,10 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectFood(_player, food2) {
+    this.food.removeTileAt(food2.x + 1, food2.y - 1);
     this.food.removeTileAt(food2.x - 1, food2.y + 1);
     this.food.removeTileAt(food2.x - 1, food2.y - 1);
+    this.food.removeTileAt(food2.x, food2.y - 1);
     this.food.removeTileAt(food2.x - 1, food2.y);
     this.food.removeTileAt(food2.x, food2.y);
     this.food.removeTileAt(food2.x, food2.y + 1);
@@ -158,27 +168,24 @@ export default class GameScene extends Phaser.Scene {
     this.cameras.main.shake(200);
 
     this.input.stopPropagation();
-
     this.scene.switch('BattleScene');
   }
 
   update(time, delta) {
     this.player.body.setVelocity(0);
 
-    // Horizontal movement
     if (this.cursors.left.isDown) {
       this.player.body.setVelocityX(-80);
     } else if (this.cursors.right.isDown) {
       this.player.body.setVelocityX(80);
     }
-    // Vertical movement
+
     if (this.cursors.up.isDown) {
       this.player.body.setVelocityY(-80);
     } else if (this.cursors.down.isDown) {
       this.player.body.setVelocityY(80);
     }
 
-    // Update the animation last and give left/right animations precedence over up/down animations
     if (this.cursors.left.isDown) {
       this.player.anims.play('left', true);
       this.player.flipX = true;
