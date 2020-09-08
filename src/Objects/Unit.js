@@ -32,12 +32,15 @@ export default class Unit extends Phaser.GameObjects.Sprite {
       this.menuItem = null;
     }
 
-    this.hb.update(damage);
+    this.hb.update(-damage);
   }
 
-  heal(target, hp) {
-    if(target.living) {
-      target.hp += hp;
+  heal() {
+    if(this.medicalKits > 0) {
+      this.hp += 10;
+      this.medicalKits--;
+
+      this.hb.update(20);
     }
   }
 
