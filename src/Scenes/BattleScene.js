@@ -17,7 +17,7 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   startBattle() {
-    let aragorn = new PlayerCharacter(this, 150, 200, "player", 1, "Aragorn", this.gameScene.warrior.hp, 20); 
+    let aragorn = new PlayerCharacter(this, 150, 200, "player", 1, "Aragorn", this.gameScene.warrior.hp, this.gameScene.warrior.medicalKits, 20); 
 
     this.add.existing(aragorn);
 
@@ -68,7 +68,11 @@ export default class BattleScene extends Phaser.Scene {
     if (action === 'attack') {            
       this.units[this.index].attack(this.enemies[target]);              
     } else if (action === 'heal') {
-      this.units[this.index].heal(this.heroes[target]);
+      if(this.heroes[target].medicalKits > 0) {
+        this.units[this.index].heal();
+      } else {
+        console.log('oh no! you dont have medical kits anymore!');
+      }
     }
 
     this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });        
