@@ -1,4 +1,4 @@
-const assets = [{
+const ASSETS = [{
     key: 'tiles',
     path: 'assets/map/spritesheet.png',
     type: 'image'
@@ -38,4 +38,4 @@ const assets = [{
   }
 ];
 
-export default assets;
+export default ASSETS;
