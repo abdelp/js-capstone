@@ -1,4 +1,5 @@
 import 'phaser';
+import 'regenerator-runtime/runtime'
 import config from './Config/config';
 import scenes from './Config/scenes';
 import Model from './Model';
