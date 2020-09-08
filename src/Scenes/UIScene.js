@@ -78,8 +78,17 @@ export default class UIScene extends Phaser.Scene {
       this.currentMenu = this.actionsMenu
       this.currentMenu.select(0);
     } else if (this.currentMenu === this.actionsMenu) {
-      this.currentMenu = this.enemiesMenu;
-      this.enemiesMenu.select(0);
+
+      if(index === 0) {
+        this.currentMenu = this.enemiesMenu;
+        this.enemiesMenu.select(0);
+      } else {
+        this.heroesMenu.deselect();
+        this.actionsMenu.deselect();
+        this.enemiesMenu.deselect();
+        this.currentMenu = null;
+        this.battleScene.receivePlayerSelection('heal', 0);
+      }
     } else if (this.currentMenu === this.enemiesMenu) {
       this.onEnemy(index);
     }
