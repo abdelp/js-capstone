@@ -12,5 +12,8 @@ export default {
       gravity: { y: 0 },
       debug: false
     }
+  },
+  dom: {
+    createContainer: true
   }
 };

@@ -8,6 +8,7 @@ import CreditsScene from './../Scenes/CreditsScene';
 import UIScene from './../Scenes/UIScene';
 import GameOverScene from './../Scenes/GameOverScene';
 import LeaderboardScene from './../Scenes/LeaderboardScene';
+import LoginScene from './../Scenes/LoginScene';
 
 const scenes = [
   { key: 'Boot', sceneConfig: BootScene},
@@ -19,7 +20,8 @@ const scenes = [
   { key: 'Battle', sceneConfig: BattleScene},
   { key: 'UIScene', sceneConfig: UIScene},
   { key: 'GameOver', sceneConfig: GameOverScene},
-  { key: 'Leaderboard', sceneConfig: LeaderboardScene}
+  { key: 'Leaderboard', sceneConfig: LeaderboardScene},
+  { key: 'Login', sceneConfig: LoginScene}
 ];
 
 export default scenes;
