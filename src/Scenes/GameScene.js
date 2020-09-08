@@ -1,6 +1,6 @@
 import 'phaser';
 import { loadAssets, createAnims } from './../Objects/Utilities';
-import assets from './../Config/assets';
+import ASSETS from './../Config/assets';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -8,7 +8,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    loadAssets(this, assets);
+    loadAssets(this, ASSETS);
     this.sys.events.on('update health points', this.updateHealthPoints, this);
   }
 
