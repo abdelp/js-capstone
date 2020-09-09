@@ -70,6 +70,8 @@ http://localhost:8080
 
 ![food](./assets/food.png)
 
+* After you collect the three food baskets, the Game Finished screen is displayed and your name in the leaderboard if your are in the top 10 players with highest scores.
+
 ## To fight
 
 When you find a hidden enemy, a battle scenario is displayed
@@ -79,7 +81,12 @@ When you find a hidden enemy, a battle scenario is displayed
 * The item to be selected is highlighted in yellow
 * To select the item and pass to the next menu you can press the Space or Enter key. The first menu is to select the warrior, the second to select between the attack the enemy or heal, you can heal just twice in all the game, so be careful when you are going to do it. And the third menu is to select the enemy to attack.
 * If you defeat the enemy, you return to the world, to continue searching the food. If you lose, the Game Over screen is displayed.
-* After you collect the three food baskets, the Game Finished screen is displayed and your name in the leaderboard if your are in the top 10 players with highest scores.
+
+## Options
+
+You can turn on/off the music and sound of the game in the options menu:
+
+![options](./assets/options.png)
 
 ### Run tests
 
@@ -88,7 +95,6 @@ To run the tests, go to the root folder of the project and run:
 ```
 npm run test
 ```
-
 
 ## Author
 
