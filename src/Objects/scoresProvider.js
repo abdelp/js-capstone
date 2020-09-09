@@ -8,6 +8,6 @@ const saveScore = (name, score) => Axios.post(`${API_ADDRESS}/${GAME_KEY}/scores
   score: parseInt(score, 10),
 });
 
-const getScores = () => Axios.get(`${API_ADDRESS}/${GAME_KEY}/scores`);
+const getScores = () => Axios.get(`${API_ADDRESS}/${GAME_KEY}/scores/`);
 
 export { saveScore, getScores };
