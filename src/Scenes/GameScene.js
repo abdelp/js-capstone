@@ -19,6 +19,7 @@ export default class GameScene extends Phaser.Scene {
 
   updateHealthPoints(points) {
     this.warrior.hp = points;
+    this.hpText.setText(`hp: ${this.warrior.hp}`);
   }
 
   createPanels(x, y, w, h) {
