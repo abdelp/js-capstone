@@ -76,6 +76,10 @@ When you find a hidden enemy, a battle scenario is displayed
 
 ![battle-scene](./assets/battle-scene.png)
 
+* The item to be selected is highlighted in yellow
+* To select the item and pass to the next menu you can press the Space or Enter key. The first menu is to select the warrior, the second to select between the attack the enemy or heal, you can heal just twice in all the game, so be careful when you are going to do it. And the third menu is to select the enemy to attack.
+* If you defeat the enemy, you return to the world, to continue searching the food. If you lose, the Game Over screen is displayed.
+
 ### Run tests
 
 To run the tests, go to the root folder of the project and run:
