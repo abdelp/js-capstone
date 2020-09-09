@@ -1,7 +1,7 @@
 import 'phaser';
 import { loadAssets, createAnims } from './../Objects/Utilities';
 import ASSETS from './../Config/assets';
-
+import { GameScoreBoard } from './../Objects/ScoreBoard';
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -20,11 +20,26 @@ export default class GameScene extends Phaser.Scene {
     this.warrior.hp = points;
   }
 
+  createPanels(x, y, w, h) {
+    this.graphics = this.add.graphics();
+    this.graphics.lineStyle(1, 0xffffff);
+    this.graphics.fillStyle(0x031f4c, 1);
+
+    this.graphics.strokeRect(x, y, w, h);
+    this.graphics.fillRect(x, y, w, h);
+    this.graphics.strokeRect(x + w, y, w, h);
+    this.graphics.fillRect(x + w, y, w, h);
+    this.graphics.strokeRect(x + (2 * w), y, w, h);
+    this.graphics.fillRect(x + (2 * w), y, w, h);
+
+    return this.graphics;
+  }
+
   create(data) {
-    console.log(data);
     this.warrior = {hp: 100,
                     medicalKits: 2,
-                    points: 0};
+                    points: 0,
+                    foodsCollected: 0};
 
     const map = this.make.tilemap({
       key: 'map'
@@ -109,6 +124,12 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
 
     this.sys.events.on('wake', this.wake, this);
+
+    this.status = this.add.rectangle(25, 250, 50, 30, "#ffffff").setOrigin(0, 0);
+    this.statusText = this.add.text(25, 250, 'score: 0', {color: 'white', fontSize: '10px' });
+    this.hpText = this.add.text(25, 250, 'hp: 100', {color: 'white', fontSize: '10px' });
+
+    this.events.on('food collected', this.checkWin, this);
   }
 
   collectFood(_player, food2) {
@@ -121,6 +142,10 @@ export default class GameScene extends Phaser.Scene {
     this.food.removeTileAt(food2.x, food2.y + 1);
     this.food.removeTileAt(food2.x + 1, food2.y);
     this.food.removeTileAt(food2.x + 1, food2.y + 1);
+
+    this.warrior.foodsCollected += 1;
+
+    this.events.emit('food collected');
   }
 
   wake() {
@@ -131,7 +156,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   onMeetEnemy(player, zone) {
-    zone.destroy();
+    zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
     this.cameras.main.shake(200);
 
     this.input.stopPropagation();
@@ -165,6 +191,21 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.play('down', true);
     } else {
       this.player.anims.stop();
+    }
+
+    this.status.setPosition(this.player.getBounds().x - 4, this.player.getBounds().y - 35);
+    this.statusText.setPosition(this.player.getBounds().x - 3, this.player.getBounds().y - 34);
+    this.hpText.setPosition(this.player.getBounds().x - 3, this.player.getBounds().y - 25);
+  }
+
+  getNumberOfFoodsCollected() {
+    return this.warrior.foodsCollected;
+  }
+
+  checkWin() {
+    const foodsCollected = this.getNumberOfFoodsCollected();
+    if(foodsCollected === 3) {
+      this.scene.switch('GameFinished');
     }
   }
 };
