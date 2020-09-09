@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import { loadAssets, createAnims } from '../Objects/Utilities';
 import ASSETS from '../Config/assets';
 
@@ -50,8 +50,8 @@ export default class GameScene extends Phaser.Scene {
     });
 
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
-    const grass = map.createStaticLayer('Grass', tiles, 0, 0);
-    const decorations = map.createStaticLayer('Decorations', tiles, 0, 0);
+    map.createStaticLayer('Grass', tiles, 0, 0);
+    map.createStaticLayer('Decorations', tiles, 0, 0);
     this.food = map.createDynamicLayer('Food', tiles, 0, 0);
 
     const enemies = map.objects[0].objects;
@@ -118,7 +118,7 @@ export default class GameScene extends Phaser.Scene {
       classType: Phaser.GameObjects.Zone,
     });
 
-    for (let i = 0; i < enemies.length; i++) {
+    for (let i = 0; i < enemies.length; i += 1) {
       this.spawns.create(enemies[i].x, enemies[i].y, 20, 20);
     }
 
@@ -170,7 +170,7 @@ export default class GameScene extends Phaser.Scene {
     this.scene.switch('BattleScene');
   }
 
-  update(time, delta) {
+  update() {
     this.player.body.setVelocity(0);
 
     if (this.cursors.left.isDown) {

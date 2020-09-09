@@ -29,7 +29,6 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "jest": "^26.4.2",
-    "phaser": "^3.3.0",
     "raw-loader": "^4.0.1",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^20.0.0",
@@ -42,6 +41,8 @@
   "dependencies": {
     "@babel/runtime": "^7.11.2",
     "await-to-js": "^2.1.1",
-    "axios": "^0.20.0"
+    "axios": "^0.20.0",
+    "phaser": "^3.3.0",
+    "regenerator-runtime": "^0.13.7"
   }
 }

@@ -1,7 +1,6 @@
-import 'phaser';
-import config from '../Config/config';
+import Phaser from 'phaser';
 import Button from '../Objects/Button';
-import { getScores, saveScore } from '../Objects/scoresProvider';
+import { getScores } from '../Objects/scoresProvider';
 
 export default class LeaderboardScene extends Phaser.Scene {
   constructor() {
@@ -16,7 +15,7 @@ export default class LeaderboardScene extends Phaser.Scene {
 
     const length = this.scoreList.length > 10 ? 11 : this.scoreList.length;
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < length; i += 1) {
       this.add.text(300, 115 + (i * 15), `${this.scoreList[i].user} ${this.scoreList[i].score}`, { color: 'white' });
     }
 

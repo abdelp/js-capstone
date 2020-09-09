@@ -5,13 +5,13 @@ function addScenes(game, arr) {
 }
 
 function destroyObjs(arr) {
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     arr[i].destroy();
   }
 }
 
 function loadAssets(scene, arr) {
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += 1) {
     scene.load[arr[i].type](arr[i].key, arr[i].path, arr[i].opts);
   }
 }

@@ -1,7 +1,6 @@
-import 'phaser';
-import HeroesMenu from '../Objects/HeroesMenu';
+import Phaser from 'phaser';
+import Menu from '../Objects/Menu';
 import ActionsMenu from '../Objects/ActionsMenu';
-import EnemiesMenu from '../Objects/EnemiesMenu';
 import Message from '../Objects/Message';
 
 export default class UIScene extends Phaser.Scene {
@@ -27,9 +26,9 @@ export default class UIScene extends Phaser.Scene {
 
     this.menus = this.add.container();
 
-    this.heroesMenu = new HeroesMenu(16, 363, this);
+    this.heroesMenu = new Menu(16, 363, this);
     this.actionsMenu = new ActionsMenu(276, 363, this);
-    this.enemiesMenu = new EnemiesMenu(536, 363, this);
+    this.enemiesMenu = new Menu(536, 363, this);
 
     this.menus.add(this.heroesMenu);
     this.menus.add(this.actionsMenu);

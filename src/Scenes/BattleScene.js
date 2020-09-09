@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import PlayerCharacter from '../Objects/PlayerCharacter';
 import Enemy from '../Objects/Enemy';
 import { destroyObjs } from '../Objects/Utilities';
@@ -21,11 +21,11 @@ export default class BattleScene extends Phaser.Scene {
 
     this.add.existing(aragorn);
 
-    const ork = new Enemy(this, 450, 200, 'ork', null, 'Ork', 100, 10);
-    this.add.existing(ork);
+    const orc = new Enemy(this, 450, 200, 'ork', null, 'orc', 100, 10);
+    this.add.existing(orc);
 
     this.heroes = [aragorn];
-    this.enemies = [ork];
+    this.enemies = [orc];
     this.units = this.heroes.concat(this.enemies);
     this.index = -1;
 
@@ -45,7 +45,7 @@ export default class BattleScene extends Phaser.Scene {
     }
 
     do {
-      this.index++;
+      this.index += 1;
       if (this.index >= this.units.length) this.index = 0;
     } while (!this.units[this.index].living);
 

@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import { destroyObjs, loadAssets } from '../Objects/Utilities';
 
 export default class PreloaderScene extends Phaser.Scene {
@@ -43,7 +43,7 @@ export default class PreloaderScene extends Phaser.Scene {
     percentText.setOrigin(0.5, 0.5);
 
     this.load.on('progress', (value) => {
-      percentText.setText(`${parseInt(value * 100)}%`);
+      percentText.setText(`${parseInt(value * 100, 10)}%`);
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
       progressBar.fillRect(250, 280, 300 * value, 30);
@@ -70,7 +70,7 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   ready() {
-    this.readyCount++;
+    this.readyCount += 1;
     if (this.readyCount === 2) this.scene.start('Title');
   }
 }

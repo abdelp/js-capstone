@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import config from '../Config/config';
 
 export default class LoginScene extends Phaser.Scene {
@@ -13,7 +13,7 @@ export default class LoginScene extends Phaser.Scene {
   create() {
     this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
 
-    const instructions = this.add.text(10, 10, 'Instructions:', {
+    this.add.text(10, 10, 'Instructions:', {
       color: 'white',
       fontFamily: 'Arial',
       fontSize: '32px ',
@@ -56,7 +56,7 @@ export default class LoginScene extends Phaser.Scene {
 
     element.addListener('click');
 
-    element.on('click', function (event) {
+    element.on('click', function (event) { // eslint-disable-line func-names
       if (event.target.name === 'loginButton') {
         const inputUsername = this.getChildByName('username');
 
