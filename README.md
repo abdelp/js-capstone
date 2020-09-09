@@ -107,9 +107,9 @@ npm run test
 
 👤 **Abdel Pérez**
 
-- GitHub: [@githubhandle](https://github.com/AbdelP)
-- Twitter: [@twitterhandle](https://twitter.com/AbdelPerez11)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/abdel-perez)
+- GitHub: [@AbdelP](https://github.com/AbdelP)
+- Twitter: [@AbdelPerez11](https://twitter.com/AbdelPerez11)
+- LinkedIn: [abdel-perez](https://linkedin.com/in/abdel-perez)
 
 
 ## 🤝 Contributing
