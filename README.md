@@ -42,7 +42,7 @@ npm i
 
 ### Usage
 
-Inside the rut folder run the watch command:
+Inside the root folder run the watch command:
 
 ```
 npm run server
