@@ -12,7 +12,38 @@ export default class LoginScene extends Phaser.Scene {
 
   create() {
     this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
-    let text = this.add.text(10, 10, 'Please login to play', {
+
+    const instructions = this.add.text(10, 10, 'Instructions:', {
+      color: 'white',
+      fontFamily: 'Arial',
+      fontSize: '32px '
+    });
+
+    this.add.text(10, 50, '- Collect the three food baskets to win.', {
+      color: 'white',
+      fontFamily: 'Arial',
+      fontSize: '16px '
+    });
+
+    this.add.text(10, 70, '- Be carefull with the enemies, they\'re hidden everywhere', {
+      color: 'white',
+      fontFamily: 'Arial',
+      fontSize: '16px '
+    });
+
+    this.add.text(10, 90, '- You can use two medical kits in the battle to heal.', {
+      color: 'white',
+      fontFamily: 'Arial',
+      fontSize: '16px '
+    });
+
+    this.add.text(10, 110, '- Use the up and down arrows to change items in the battle, and space or enter to pick them.', {
+      color: 'white',
+      fontFamily: 'Arial',
+      fontSize: '16px '
+    });
+
+    let text = this.add.text(10, 130, 'Please login to play', {
       color: 'white',
       fontFamily: 'Arial',
       fontSize: '32px '
@@ -52,7 +83,7 @@ export default class LoginScene extends Phaser.Scene {
             }
           });
 
-          this.scene.sys.scenePlugin.start('Game', {warriorName: inputUsername.value});
+          this.scene.sys.scenePlugin.start('Game', {name: inputUsername.value});
         } else {
           this.scene.tweens.add({
             targets: text,
