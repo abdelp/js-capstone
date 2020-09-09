@@ -33,8 +33,14 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   nextTurn() {
-    if(this.checkEndBattle()) {           
+    const endGame = this.checkEndBattle();
+
+    if(endGame === 1) {           
       this.endBattle();
+      return;
+    } else if (endGame === -1) {
+      this.scene.sleep('UIScene');
+      this.scene.switch('GameOver');
       return;
     }
 
@@ -53,6 +59,7 @@ export default class BattleScene extends Phaser.Scene {
 
       this.units[this.index].attack(this.heroes[r]);
       this.gameScene.events.emit('update health points', this.heroes[r].hp);
+
       this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
   }
@@ -60,8 +67,15 @@ export default class BattleScene extends Phaser.Scene {
   checkEndBattle() {        
     let victory = !this.enemies.some(enemy => enemy.living);
     let gameOver = !this.heroes.some(heroe => heroe.living);
+    let result = 0;
 
-    return victory || gameOver;
+    if (victory) {
+      result = 1;
+    } else if (gameOver) {
+      result = -1;
+    }
+
+    return result;
   }
 
   receivePlayerSelection(action, target) {

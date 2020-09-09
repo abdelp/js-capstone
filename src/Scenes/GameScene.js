@@ -12,13 +12,19 @@ export default class GameScene extends Phaser.Scene {
     this.sys.events.on('update health points', this.updateHealthPoints, this);
   }
 
+  updateScorePoints(points) {
+    this.warrior.points += points;
+  }
+
   updateHealthPoints(points) {
     this.warrior.hp = points;
   }
 
-  create() {
+  create(data) {
+    console.log(data);
     this.warrior = {hp: 100,
-                 medicalKits: 2};
+                    medicalKits: 2,
+                    points: 0};
 
     const map = this.make.tilemap({
       key: 'map'
