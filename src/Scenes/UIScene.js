@@ -1,11 +1,10 @@
 import 'phaser';
-import HeroesMenu from './../Objects/HeroesMenu';
-import ActionsMenu from './../Objects/ActionsMenu';
-import EnemiesMenu from './../Objects/EnemiesMenu';
-import Message from './../Objects/Message';
+import HeroesMenu from '../Objects/HeroesMenu';
+import ActionsMenu from '../Objects/ActionsMenu';
+import EnemiesMenu from '../Objects/EnemiesMenu';
+import Message from '../Objects/Message';
 
 export default class UIScene extends Phaser.Scene {
-
   constructor() {
     super('UIScene');
   }
@@ -23,41 +22,40 @@ export default class UIScene extends Phaser.Scene {
     this.graphics.fillRect(x + (2 * w), y, w, h);
   }
 
-  create()
-  {
+  create() {
     this.createPanels(10, 350, 260, 90);
 
     this.menus = this.add.container();
 
-    this.heroesMenu = new HeroesMenu(16, 363, this);           
-    this.actionsMenu = new ActionsMenu(276, 363, this);            
+    this.heroesMenu = new HeroesMenu(16, 363, this);
+    this.actionsMenu = new ActionsMenu(276, 363, this);
     this.enemiesMenu = new EnemiesMenu(536, 363, this);
 
     this.menus.add(this.heroesMenu);
     this.menus.add(this.actionsMenu);
     this.menus.add(this.enemiesMenu);
-            
-    this.battleScene = this.scene.get("BattleScene");                                
 
-    this.input.keyboard.on("keydown", this.onKeyInput, this);
-    this.events.on("SelectedAction", this.onSelectedAction, this);
-    this.battleScene.events.on("PlayerTurn", this.onPlayerTurn, this);
+    this.battleScene = this.scene.get('BattleScene');
+
+    this.input.keyboard.on('keydown', this.onKeyInput, this);
+    this.events.on('SelectedAction', this.onSelectedAction, this);
+    this.battleScene.events.on('PlayerTurn', this.onPlayerTurn, this);
 
     this.sys.events.on('wake', this.createMenu, this);
 
     this.message = new Message(this, this.battleScene.events);
     this.add.existing(this.message);
-    
+
     this.createMenu();
     this.currentMenu = this.heroesMenu;
-    this.currentMenu.select(0);  
+    this.currentMenu.select(0);
   }
 
   createMenu() {
     this.remapHeroes();
     this.remapEnemies();
 
-    this.battleScene.nextTurn(); 
+    this.battleScene.nextTurn();
   }
 
   onEnemy(index) {
@@ -65,7 +63,7 @@ export default class UIScene extends Phaser.Scene {
     this.actionsMenu.deselect();
     this.enemiesMenu.deselect();
     this.currentMenu = null;
-    this.battleScene.receivePlayerSelection("attack", index);   
+    this.battleScene.receivePlayerSelection('attack', index);
   }
 
   onPlayerTurn() {
@@ -75,11 +73,10 @@ export default class UIScene extends Phaser.Scene {
 
   onSelectedAction(index) {
     if (this.currentMenu === this.heroesMenu) {
-      this.currentMenu = this.actionsMenu
+      this.currentMenu = this.actionsMenu;
       this.currentMenu.select(0);
     } else if (this.currentMenu === this.actionsMenu) {
-
-      if(index === 0) {
+      if (index === 0) {
         this.currentMenu = this.enemiesMenu;
         this.enemiesMenu.select(0);
       } else {
@@ -95,24 +92,24 @@ export default class UIScene extends Phaser.Scene {
   }
 
   remapHeroes() {
-    const heroes = this.battleScene.heroes;
+    const { heroes } = this.battleScene;
     this.heroesMenu.remap(heroes);
   }
 
   remapEnemies() {
-    const enemies = this.battleScene.enemies;
+    const { enemies } = this.battleScene;
     this.enemiesMenu.remap(enemies);
   }
 
   onKeyInput(event) {
-    if(this.currentMenu && this.currentMenu.selected) {
-      if(event.code === "ArrowUp") {
+    if (this.currentMenu && this.currentMenu.selected) {
+      if (event.code === 'ArrowUp') {
         this.currentMenu.moveSelectionUp();
-      } else if(event.code === "ArrowDown") {
+      } else if (event.code === 'ArrowDown') {
         this.currentMenu.moveSelectionDown();
-      } else if(event.code === "Space" || event.code === "Enter") {
+      } else if (event.code === 'Space' || event.code === 'Enter') {
         this.currentMenu.confirm();
       }
     }
   }
-};
+}

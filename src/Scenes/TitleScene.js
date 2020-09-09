@@ -3,13 +3,13 @@ import config from '../Config/config';
 import Button from '../Objects/Button';
 
 export default class TitleScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Title');
   }
 
-  create () {
-    const btnWidth = config.width/2;
-    const btnHeight = config.height/2;
+  create() {
+    const btnWidth = config.width / 2;
+    const btnHeight = config.height / 2;
 
     this.gameButton = new Button(this, btnWidth, btnHeight - 100, 'blueButton1', 'blueButton2', 'Play', 'Login');
     this.optionsButton = new Button(this, btnWidth, btnHeight, 'blueButton1', 'blueButton2', 'Options', 'Options');
@@ -24,4 +24,4 @@ export default class TitleScene extends Phaser.Scene {
       this.sys.game.globals.bgMusic = this.bgMusic;
     }
   }
-};
+}

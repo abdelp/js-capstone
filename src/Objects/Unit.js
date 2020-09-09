@@ -2,7 +2,6 @@ import 'phaser';
 import HealthBar from './HealthBar';
 
 export default class Unit extends Phaser.GameObjects.Sprite {
-
   constructor(scene, x, y, texture, frame, type, hp, damage) {
     super(scene, x, y, texture, frame);
     this.type = type;
@@ -24,11 +23,11 @@ export default class Unit extends Phaser.GameObjects.Sprite {
 
   takeDamage(damage) {
     this.hp -= damage;
-    if(this.hp <= 0) {
+    if (this.hp <= 0) {
       this.hp = 0;
       this.menuItem.unitKilled();
       this.living = false;
-      this.visible = false;   
+      this.visible = false;
       this.menuItem = null;
     }
 
@@ -36,7 +35,7 @@ export default class Unit extends Phaser.GameObjects.Sprite {
   }
 
   heal() {
-    if(this.medicalKits > 0) {
+    if (this.medicalKits > 0) {
       this.hp += 10;
       this.medicalKits--;
 

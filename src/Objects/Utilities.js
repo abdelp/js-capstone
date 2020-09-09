@@ -1,5 +1,5 @@
 function addScenes(game, arr) {
-  for(let i = 0; i < arr.length; i += 1) {
+  for (let i = 0; i < arr.length; i += 1) {
     game.scene.add(arr[i].key, arr[i].sceneConfig);
   }
 }
@@ -22,4 +22,6 @@ function createAnims(scene, arr) {
   }
 }
 
-export { addScenes, destroyObjs, loadAssets, createAnims };
+export {
+  addScenes, destroyObjs, loadAssets, createAnims,
+};

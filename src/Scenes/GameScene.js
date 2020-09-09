@@ -1,6 +1,7 @@
 import 'phaser';
-import { loadAssets, createAnims } from './../Objects/Utilities';
-import ASSETS from './../Config/assets';
+import { loadAssets, createAnims } from '../Objects/Utilities';
+import ASSETS from '../Config/assets';
+
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -36,14 +37,16 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create(data) {
-    this.warrior = {name: data.name,
-                    hp: 100,
-                    medicalKits: 2,
-                    points: 0,
-                    foodsCollected: 0};
+    this.warrior = {
+      name: data.name,
+      hp: 100,
+      medicalKits: 2,
+      points: 0,
+      foodsCollected: 0,
+    };
 
     const map = this.make.tilemap({
-      key: 'map'
+      key: 'map',
     });
 
     const tiles = map.addTilesetImage('spritesheet', 'tiles');
@@ -52,43 +55,43 @@ export default class GameScene extends Phaser.Scene {
     this.food = map.createDynamicLayer('Food', tiles, 0, 0);
 
     const enemies = map.objects[0].objects;
-    let obstacles = map.createDynamicLayer('Obstacles', tiles, 0, 0);
+    const obstacles = map.createDynamicLayer('Obstacles', tiles, 0, 0);
 
     obstacles.setCollisionByExclusion([-1]);
     this.food.setCollisionByExclusion([-1]);
 
     const anims = [{
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('player', {
-          frames: [6, 7, 8]
-        }),
-        frameRate: 10,
-        repeat: -1
-      },
-      {
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('player', {
-          frames: [6, 7, 8]
-        }),
-        frameRate: 10,
-        repeat: -1
-      },
-      {
-        key: 'up',
-        frames: this.anims.generateFrameNumbers('player', {
-          frames: [9, 10, 11]
-        }),
-        frameRate: 10,
-        repeat: -1
-      },
-      {
-        key: 'down',
-        frames: this.anims.generateFrameNumbers('player', {
-          frames: [0, 1]
-        }),
-        frameRate: 10,
-        repeat: -1
-      }
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('player', {
+        frames: [6, 7, 8],
+      }),
+      frameRate: 10,
+      repeat: -1,
+    },
+    {
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('player', {
+        frames: [6, 7, 8],
+      }),
+      frameRate: 10,
+      repeat: -1,
+    },
+    {
+      key: 'up',
+      frames: this.anims.generateFrameNumbers('player', {
+        frames: [9, 10, 11],
+      }),
+      frameRate: 10,
+      repeat: -1,
+    },
+    {
+      key: 'down',
+      frames: this.anims.generateFrameNumbers('player', {
+        frames: [0, 1],
+      }),
+      frameRate: 10,
+      repeat: -1,
+    },
     ];
 
     createAnims(this, anims);
@@ -104,15 +107,15 @@ export default class GameScene extends Phaser.Scene {
     this.cameras.main.startFollow(this.player);
     this.cameras.main.roundPixels = true;
     this.cameras.main.setZoom(2);
-    
+
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.spawns = this.physics.add.group({
-      classType: Phaser.GameObjects.Zone
+      classType: Phaser.GameObjects.Zone,
     });
 
     this.collect = this.physics.add.group({
-      classType: Phaser.GameObjects.Zone
+      classType: Phaser.GameObjects.Zone,
     });
 
     for (let i = 0; i < enemies.length; i++) {
@@ -126,9 +129,9 @@ export default class GameScene extends Phaser.Scene {
 
     this.sys.events.on('wake', this.wake, this);
 
-    this.status = this.add.rectangle(25, 250, 70, 30, "#ffffff").setOrigin(0, 0);
-    this.statusText = this.add.text(25, 250, 'score: 0', {color: 'white', fontSize: '9px' });
-    this.hpText = this.add.text(25, 250, 'hp: 100', {color: 'white', fontSize: '9px' });
+    this.status = this.add.rectangle(25, 250, 70, 30, '#ffffff').setOrigin(0, 0);
+    this.statusText = this.add.text(25, 250, 'score: 0', { color: 'white', fontSize: '9px' });
+    this.hpText = this.add.text(25, 250, 'hp: 100', { color: 'white', fontSize: '9px' });
 
     this.events.on('update score points', this.updateScorePoints, this);
     this.events.on('food collected', this.checkWin, this);
@@ -207,8 +210,8 @@ export default class GameScene extends Phaser.Scene {
 
   checkWin() {
     const foodsCollected = this.getNumberOfFoodsCollected();
-    if(foodsCollected === 3) {
-      this.scene.start('GameFinished', {name: this.warrior.name, score: this.warrior.points});
+    if (foodsCollected === 3) {
+      this.scene.start('GameFinished', { name: this.warrior.name, score: this.warrior.points });
     }
   }
-};
+}

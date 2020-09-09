@@ -6,4 +6,4 @@ export default class Enemy extends Unit {
     this.displayHeight = 80;
     this.displayWidth = 80;
   }
-};
+}

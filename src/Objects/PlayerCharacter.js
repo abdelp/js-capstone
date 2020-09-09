@@ -7,4 +7,4 @@ export default class PlayerCharacter extends Unit {
     this.setScale(2);
     this.medicalKits = medicalKits;
   }
-};
+}
