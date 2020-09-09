@@ -22,7 +22,7 @@ export default class BattleScene extends Phaser.Scene {
 
     this.add.existing(aragorn);
 
-    const ork = new Enemy(this, 450, 200, "ork", null, "Ork", 100, 100);
+    const ork = new Enemy(this, 450, 200, "ork", null, "Ork", 100, 10);
     this.add.existing(ork);
 
     this.heroes = [ aragorn ];
