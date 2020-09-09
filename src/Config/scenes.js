@@ -9,6 +9,7 @@ import UIScene from './../Scenes/UIScene';
 import GameOverScene from './../Scenes/GameOverScene';
 import LeaderboardScene from './../Scenes/LeaderboardScene';
 import LoginScene from './../Scenes/LoginScene';
+import GameFinishedScene from './../Scenes/GameFinishedScene';
 
 const scenes = [
   { key: 'Boot', sceneConfig: BootScene},
@@ -21,7 +22,8 @@ const scenes = [
   { key: 'UIScene', sceneConfig: UIScene},
   { key: 'GameOver', sceneConfig: GameOverScene},
   { key: 'Leaderboard', sceneConfig: LeaderboardScene},
-  { key: 'Login', sceneConfig: LoginScene}
+  { key: 'Login', sceneConfig: LoginScene},
+  { key: 'GameFinished', sceneConfig: GameFinishedScene }
 ];
 
 export default scenes;
