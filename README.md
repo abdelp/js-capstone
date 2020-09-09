@@ -21,7 +21,7 @@
 [Live Demo Link](https://javascript-capstone.web.app)
 
 
-## Getting Started
+## Setup
 
 First, clone or download the repo:
 
@@ -34,6 +34,13 @@ Inside the root folder, install the node packages:
 ```
 npm i
 ```
+
+## Potential Features
+
+* Add more heroes and enemies.
+* Add more action options, like different attacks.
+* Add options to improve the attack, heal, like equip the warrior with armor, different kind of swords, arrows.
+* Make it more interactive, add more dialogs.
 
 ### Prerequisites
 
