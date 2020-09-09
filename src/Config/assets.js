@@ -14,25 +14,11 @@ const ASSETS = [{
     type: 'image'
   },
   {
-    key: 'dragonorrange',
-    path: 'assets/dragonorrange.png',
-    type: 'image'
-  },
-  {
     key: 'player',
     path: 'assets/RPG_assets.png',
     opts: {
       frameWidth: 32,
       frameHeight: 32
-    },
-    type: 'spritesheet'
-  },
-  {
-    key: 'life_bar',
-    path: 'assets/life.png',
-    opts: {
-      frameWidth: 214,
-      frameHeight: 28
     },
     type: 'spritesheet'
   }
