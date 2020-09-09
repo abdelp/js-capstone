@@ -1,7 +1,6 @@
 import 'phaser';
 import { loadAssets, createAnims } from './../Objects/Utilities';
 import ASSETS from './../Config/assets';
-import { GameScoreBoard } from './../Objects/ScoreBoard';
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
@@ -14,6 +13,7 @@ export default class GameScene extends Phaser.Scene {
 
   updateScorePoints(points) {
     this.warrior.points += points;
+    this.statusText.setText(`score: ${this.warrior.points}`);
   }
 
   updateHealthPoints(points) {
@@ -36,7 +36,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create(data) {
-    this.warrior = {hp: 100,
+    this.warrior = {name: data.name,
+                    hp: 100,
                     medicalKits: 2,
                     points: 0,
                     foodsCollected: 0};
@@ -125,10 +126,11 @@ export default class GameScene extends Phaser.Scene {
 
     this.sys.events.on('wake', this.wake, this);
 
-    this.status = this.add.rectangle(25, 250, 50, 30, "#ffffff").setOrigin(0, 0);
-    this.statusText = this.add.text(25, 250, 'score: 0', {color: 'white', fontSize: '10px' });
-    this.hpText = this.add.text(25, 250, 'hp: 100', {color: 'white', fontSize: '10px' });
+    this.status = this.add.rectangle(25, 250, 70, 30, "#ffffff").setOrigin(0, 0);
+    this.statusText = this.add.text(25, 250, 'score: 0', {color: 'white', fontSize: '9px' });
+    this.hpText = this.add.text(25, 250, 'hp: 100', {color: 'white', fontSize: '9px' });
 
+    this.events.on('update score points', this.updateScorePoints, this);
     this.events.on('food collected', this.checkWin, this);
   }
 
@@ -146,6 +148,7 @@ export default class GameScene extends Phaser.Scene {
     this.warrior.foodsCollected += 1;
 
     this.events.emit('food collected');
+    this.events.emit('update score points', 10);
   }
 
   wake() {
@@ -205,7 +208,7 @@ export default class GameScene extends Phaser.Scene {
   checkWin() {
     const foodsCollected = this.getNumberOfFoodsCollected();
     if(foodsCollected === 3) {
-      this.scene.switch('GameFinished');
+      this.scene.start('GameFinished', {name: this.warrior.name, score: this.warrior.points});
     }
   }
 };
