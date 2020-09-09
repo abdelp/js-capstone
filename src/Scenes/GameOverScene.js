@@ -1,49 +1,26 @@
 import 'phaser';
-import config from '../Config/config';
+import Button from './../Objects/Button';
+import * as ScoresProvider from './../Objects/scoresProvider';
 
-export default class GameOverScene extends Phaser.Scene {
+export default class gameOverScene extends Phaser.Scene {
   constructor () {
     super('GameOver');
   }
 
-  create () {
-    this.gameOverText = this.add.text(0, 0, 'Game Over', { fontSize: '32px', fill: '#fff' });
-    this.leaderboardTitle = this.add.text(0, 0, 'Leaderboard', { fontSize: '26px', fill: '#fff' });
-    this.zone = this.add.zone(config.width/2, config.height/2, config.width, config.height);
+  async create (data) {
+    this.gameFinishedText = this.add.text(300, 50, 'You have lost', { fontSize: '32px', fill: '#fff' });
+    this.leaderboardTitle = this.add.text(300, 80, 'Leaderboard', { fontSize: '26px', fill: '#fff' });
 
-    Phaser.Display.Align.In.Center(
-      this.gameOverText,
-      this.zone
-    );
+    await ScoresProvider.saveScore(data.name, data.score);
+    this.scoreList = (await ScoresProvider.getScores()).data.result;
+    this.scoreList = this.scoreList.sort((a, b) => b.score - a.score);
 
-    Phaser.Display.Align.In.Center(
-      this.leaderboardTitle,
-      this.zone
-    );
+    const length = this.scoreList.length > 10 ? 11 : this.scoreList.length;
+  
+    for(let i = 0; i < length; i ++) {
+      this.add.text(300, 115 + (i*15), `${this.scoreList[i].user} ${this.scoreList[i].score}`, { color: 'white'});
+    }
 
-    this.leaderboardTitle.setY(1000);
-
-    this.creditsTween = this.tweens.add({
-      targets: this.gameOverText,
-      y: -100,
-      ease: 'Power1',
-      duration: 3000,
-      delay: 1000,
-      onComplete: function () {
-        this.destroy;
-      }
-    });
-
-    this.madeByTween = this.tweens.add({
-      targets: this.leaderboardTitle,
-      y: -300,
-      ease: 'Power1',
-      duration: 8000,
-      delay: 1000,
-      onComplete: function () {
-        this.madeByTween.destroy;
-        this.scene.start('Title');
-      }.bind(this)
-    });
+    this.menuButton = new Button(this, 400, 530, 'blueButton1', 'blueButton2', 'menu', 'Title');
   }
 };
