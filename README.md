@@ -1,41 +1,88 @@
-![](https://img.shields.io/badge/Microverse-blueviolet)
+# LOTR Adventure - Phaser Game
 
-# Project Name
+> A RPG game built with Phaser 3. The mission of the warrior is to get the food to his twon, but several villains are lurking around.
 
-> One paragraph statement about the project.
-
-![screenshot](./app_screenshot.png)
-
-Additional description about the project and its features.
+![screenshot](./app_screenshot.gif)
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- JavaScript
+- Phaser 3
+- Tiled
+- Webpack
+- npm
+- Firebase
+- ESLint
+- StyleLint
+- Jest
 
 ## Live Demo
 
-[Live Demo Link](https://livedemo.com)
+[Live Demo Link](https://javascript-capstone.web.app)
 
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+First, clone or download the repo:
 
+```
+git clone https://github.com/abdelp/js-capstone.git
+```
 
-To get a local copy up and running follow these simple example steps.
+Inside the root folder, install the node packages:
+
+```
+npm i
+```
 
 ### Prerequisites
 
-### Setup
+- npm 6.14.5
 
-### Install
 
 ### Usage
 
+Inside the rut folder run the watch command:
+
+```
+npm run server
+```
+
+By default, the game will be deployed on port 8080 of your localhost:
+
+```
+http://localhost:8080
+```
+
+### How to play
+
+* In the main manu, click on "Play" button
+
+![step 1](./assets/step1.png)
+
+* After that, you need to enter the name for the player
+
+![step 2](./assets/step2.png)
+
+* To move the player, you can use the arrow keys (🡡 up, 🡣 down, 🡠 left, right 🡢)
+
+* You need to collect the three food baskets distributed in the map
+
+![food](./assets/food.png)
+
+## To fight
+
+When you find a hidden enemy, a battle scenario is displayed
+
+![battle-scene](./assets/battle-scene.png)
+
 ### Run tests
+
+To run the tests, go to the root folder of the project and run:
+
+```
+npm run test
+```
 
 ### Deployment
 
@@ -43,17 +90,12 @@ To get a local copy up and running follow these simple example steps.
 
 ## Authors
 
-👤 **Author1**
+👤 **Abdel Pérez**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/linkedinhandle)
+- GitHub: [@githubhandle](https://github.com/AbdelP)
+- Twitter: [@twitterhandle](https://twitter.com/AbdelPerez11)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/abdel-perez)
 
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/linkedinhandle)
 
 ## 🤝 Contributing
 
@@ -67,9 +109,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Microverse Inc.
+- Inspiration [ZENVA Academy](https://academy.zenva.com/)
 
 ## 📝 License
 

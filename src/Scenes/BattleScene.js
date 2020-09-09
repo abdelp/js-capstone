@@ -17,7 +17,7 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   startBattle() {
-    const aragorn = new PlayerCharacter(this, 150, 200, 'player', 1, 'Aragorn', this.gameScene.warrior.hp, this.gameScene.warrior.medicalKits, 20);
+    const aragorn = new PlayerCharacter(this, 150, 200, 'player', 1, 'Aragorn', this.gameScene.warrior.hp, this.gameScene.warrior.medicalKits, 50);
 
     this.add.existing(aragorn);
 
