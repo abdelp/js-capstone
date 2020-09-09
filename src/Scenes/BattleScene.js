@@ -12,6 +12,7 @@ export default class BattleScene extends Phaser.Scene {
   {
     this.cameras.main.setBackgroundColor("rgba(0, 200, 0, 0.5)");
     this.gameScene = this.scene.get("Game");
+    this.warrior = this.gameScene.warrior;
     this.startBattle();
     this.sys.events.on('wake', this.startBattle, this);             
   }
@@ -21,7 +22,7 @@ export default class BattleScene extends Phaser.Scene {
 
     this.add.existing(aragorn);
 
-    const ork = new Enemy(this, 450, 200, "ork", null, "Ork", 100, 10);
+    const ork = new Enemy(this, 450, 200, "ork", null, "Ork", 100, 100);
     this.add.existing(ork);
 
     this.heroes = [ aragorn ];
@@ -40,7 +41,7 @@ export default class BattleScene extends Phaser.Scene {
       return;
     } else if (endGame === -1) {
       this.scene.sleep('UIScene');
-      this.scene.switch('GameOver');
+      this.scene.start('GameOver', {name: this.warrior.name, score: this.warrior.points});
       return;
     }
 
@@ -84,8 +85,6 @@ export default class BattleScene extends Phaser.Scene {
     } else if (action === 'heal') {
       if(this.heroes[target].medicalKits > 0) {
         this.units[this.index].heal();
-      } else {
-        console.log('oh no! you dont have medical kits anymore!');
       }
     }
 
@@ -93,6 +92,7 @@ export default class BattleScene extends Phaser.Scene {
   }
 
   endBattle() {
+    this.gameScene.events.emit('update score points', 20);
     this.heroes.length = 0;
     this.enemies.length = 0;
     destroyObjs(this.units);
