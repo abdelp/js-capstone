@@ -1,22 +1,22 @@
-function addScenes(game, arr) {
+const addScenes = (game, arr) => {
   for (let i = 0; i < arr.length; i += 1) {
     game.scene.add(arr[i].key, arr[i].sceneConfig);
   }
 }
 
-function destroyObjs(arr) {
+const destroyObjs = (arr) => {
   for (let i = 0; i < arr.length; i += 1) {
     arr[i].destroy();
   }
 }
 
-function loadAssets(scene, arr) {
+const loadAssets = (scene, arr) => {
   for (let i = 0; i < arr.length; i += 1) {
     scene.load[arr[i].type](arr[i].key, arr[i].path, arr[i].opts);
   }
 }
 
-function createAnims(scene, arr) {
+const createAnims = (scene, arr) => {
   for (let i = 0; i < arr.length; i += 1) {
     scene.anims.create(arr[i]);
   }
