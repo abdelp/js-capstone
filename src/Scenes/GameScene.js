@@ -9,15 +9,19 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     loadAssets(this, ASSETS);
-    this.sys.events.on('update health points', this.updateHealthPoints, this);
+    this.sys.events.on('health points updated', this.setWarriorHP, this);
   }
 
-  updateScorePoints(points) {
+  getWarriorData() {
+    return this.warrior;
+  }
+
+  setWarriorScorePoints(points) {
     this.warrior.points += points;
     this.statusText.setText(`score: ${this.warrior.points}`);
   }
 
-  updateHealthPoints(points) {
+  setWarriorHP(points) {
     this.warrior.hp = points;
     this.hpText.setText(`hp: ${this.warrior.hp}`);
   }
@@ -134,7 +138,7 @@ export default class GameScene extends Phaser.Scene {
     this.statusText = this.add.text(25, 250, 'score: 0', { color: 'white', fontSize: '9px' });
     this.hpText = this.add.text(25, 250, 'hp: 100', { color: 'white', fontSize: '9px' });
 
-    this.events.on('update score points', this.updateScorePoints, this);
+    this.events.on('update score points', this.setWarriorScorePoints, this);
     this.events.on('food collected', this.checkWin, this);
   }
 
@@ -168,7 +172,7 @@ export default class GameScene extends Phaser.Scene {
     this.cameras.main.shake(200);
 
     this.input.stopPropagation();
-    this.scene.switch('BattleScene');
+    this.scene.switch('BattleScene', this.getWarriorData());
   }
 
   update() {
@@ -205,12 +209,8 @@ export default class GameScene extends Phaser.Scene {
     this.hpText.setPosition(this.player.getBounds().x - 3, this.player.getBounds().y - 25);
   }
 
-  getNumberOfFoodsCollected() {
-    return this.warrior.foodsCollected;
-  }
-
   checkWin() {
-    const foodsCollected = this.getNumberOfFoodsCollected();
+    const { foodsCollected } = this.getWarriorData();
     if (foodsCollected === 3) {
       this.scene.start('GameFinished', { name: this.warrior.name, score: this.warrior.points });
     }

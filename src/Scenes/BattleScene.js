@@ -43,7 +43,7 @@ export default class BattleScene extends Phaser.Scene {
       this.scene.start('GameOver', { name: this.warrior.name, score: this.warrior.points });
       return;
     }
-
+    console.log('enemy');
     do {
       this.index += 1;
       if (this.index >= this.units.length) this.index = 0;
@@ -58,7 +58,7 @@ export default class BattleScene extends Phaser.Scene {
       } while (!this.heroes[r].living);
 
       this.units[this.index].attack(this.heroes[r]);
-      this.gameScene.events.emit('update health points', this.heroes[r].hp);
+      this.gameScene.events.emit('health points updated', this.heroes[r].hp);
 
       this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
     }
