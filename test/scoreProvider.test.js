@@ -1,23 +1,24 @@
 import * as ScoresProvider from '../src/Objects/scoresProvider';
+
 jest.mock('../src/Objects/scoresProvider');
 
-describe('Scores API', () => {
+describe('Scores API tests', () => {
   ScoresProvider.saveScore.mockImplementation((name, score) => new Promise((resolve, reject) => {
-    if(!name) {
-      reject({ result: 'You need to provide a valid user for the score' });
+    if (!name) {
+      reject(Error({ result: 'You need to provide a valid user for the score' }));
     } else if (!score) {
-      reject({ result: 'You need to provide a valid score for the leaderboard' });
+      reject(Error({ result: 'You need to provide a valid score for the leaderboard' }));
     } else {
       resolve({ result: 'Leaderboard score created correctly.' });
     }
-  }))
+  }));
 
   ScoresProvider.getScores.mockResolvedValue({
     data: {
       result: [
-        { name: 'abdelp', score: 100}
-      ]
-    }
+        { name: 'abdelp', score: 100 },
+      ],
+    },
   });
 
   it('should save the user score', () => {
@@ -39,7 +40,7 @@ describe('Scores API', () => {
     ScoresProvider.getScores().then(response => expect(response).toEqual({
       data: {
         result: [
-          { name: 'abdelp', score: 100 }
+          { name: 'abdelp', score: 100 },
         ],
       },
     }));

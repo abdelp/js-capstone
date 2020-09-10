@@ -43,7 +43,7 @@ export default class BattleScene extends Phaser.Scene {
       this.scene.start('GameOver', { name: this.warrior.name, score: this.warrior.points });
       return;
     }
-    console.log('enemy');
+
     do {
       this.index += 1;
       if (this.index >= this.units.length) this.index = 0;
