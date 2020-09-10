@@ -24,6 +24,13 @@
 
 [Live Demo Link](https://javascript-capstone.web.app)
 
+## Development Process
+
+The first day I had to start investigating how to create video games with [Phaser 3](www.phaser.io), so I decided to follow this [tutorial](https://phaser.io/tutorials/making-your-first-phaser-3-game/part1). After that, I needed to create a more organized structure for my project. The structure I used is described in this [article](https://phasertutorials.com/creating-a-phaser-3-template-part-1/).
+
+After finishing setting my initial project structure, I started reading about some basic [video games design principles](https://www.gamedesigning.org/learn/game-design-principles/), [mechanics](https://www.gamedesigning.org/learn/basic-game-mechanics/), and [level design](https://www.gamedesigning.org/learn/level-design/)
+
+Having read the concepts necessary to create a video game, I picked my assets from [crafpix](www.crafpix.com) for the game tileset and used the [API](https://us-central1-js-capstone-backend.cloudfunctions.net/api/games) created by Microverse to save the players scores.
 
 ## Setup
 
