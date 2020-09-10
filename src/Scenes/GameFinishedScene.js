@@ -8,7 +8,7 @@ export default class gameFinishedScene extends Phaser.Scene {
   }
 
   async create(data) {
-    this.gameFinishedText = this.add.text(300, 50, 'You win', { fontSize: '32px', fill: '#fff' });
+    this.gameFinishedText = this.add.text(300, 50, 'You won', { fontSize: '32px', fill: '#fff' });
     this.leaderboardTitle = this.add.text(300, 80, 'Leaderboard', { fontSize: '26px', fill: '#fff' });
 
     await saveScore(data.name, data.score);
