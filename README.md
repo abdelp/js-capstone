@@ -16,6 +16,10 @@
 - StyleLint
 - Jest
 
+## Video Presentation
+
+[Presentation](https://www.loom.com/share/105757c0729b4d718b64e9ad82300db4)
+
 ## Live Demo
 
 [Live Demo Link](https://javascript-capstone.web.app)
