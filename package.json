@@ -4,7 +4,7 @@
   "description": "A Phaser 3 Project Template",
   "main": "src/index.js",
   "scripts": {
-    "start": "firebase serve",
+    "start": "webpack-dev-server --open",
     "build": "webpack",
     "server": "webpack-dev-server",
     "watch": "webpack --watch",

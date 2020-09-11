@@ -8,3 +8,4 @@ firebase.json
 assets/bkp
 *.bkp*
 orc-sprite.png
+build/
