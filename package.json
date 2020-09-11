@@ -1,0 +1,57 @@
+{
+  "name": "phaser3-project-template-3",
+  "version": "1.0.0",
+  "description": "A Phaser 3 Project Template",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "build": "webpack",
+    "server": "webpack-dev-server",
+    "watch": "webpack --watch",
+    "test": "jest",
+    "watch-test": "jest watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:abdelp/js-capstone.git"
+  },
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+  "bugs": {
+    "url": "https://github.com/abdelp/js-capstone/issues"
+  },
+  "homepage": "https://github.com/abdelp/js-capstone#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.5",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
+    "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "jest": "^26.4.2",
+    "jest-canvas-mock": "^2.2.0",
+    "raw-loader": "^4.0.1",
+    "stylelint": "^13.3.3",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-csstree-validator": "^1.8.0",
+    "stylelint-scss": "^3.17.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "await-to-js": "^2.1.1",
+    "axios": "^0.20.0",
+    "phaser": "^3.3.0",
+    "regenerator-runtime": "^0.13.7"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  }
+}

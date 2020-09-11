@@ -1,0 +1,11 @@
+node_modules/
+firebase-debug.log
+.firebaserc
+firebase.json
+.firebase
+.package-lock.json
+.vscode
+assets/bkp
+*.bkp*
+orc-sprite.png
+build/
