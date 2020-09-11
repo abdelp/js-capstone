@@ -4,21 +4,23 @@
   "description": "A Phaser 3 Project Template",
   "main": "src/index.js",
   "scripts": {
+    "start": "firebase serve",
     "build": "webpack",
     "server": "webpack-dev-server",
     "watch": "webpack --watch",
+    "test": "jest",
     "watch-test": "jest watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://scottwestover@bitbucket.org/creativerendering/phaser3-template.git"
+    "url": "git@github.com:abdelp/js-capstone.git"
   },
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "bugs": {
-    "url": "https://github.com/photonstorm/phaser3-project-template/issues"
+    "url": "https://github.com/abdelp/js-capstone/issues"
   },
-  "homepage": "https://github.com/photonstorm/phaser3-project-template#readme",
+  "homepage": "https://github.com/abdelp/js-capstone#readme",
   "devDependencies": {
     "@babel/core": "^7.11.5",
     "@babel/plugin-transform-runtime": "^7.11.5",
