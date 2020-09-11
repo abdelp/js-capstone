@@ -1,6 +1,10 @@
 import Phaser from 'phaser';
-import { loadAssets, createAnims } from '../Objects/Utilities';
+import {
+  loadAssets,
+  createAnims,
+} from '../Objects/Utilities';
 import ASSETS from '../Config/assets';
+import * as Doman from '../Objects/Display';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -18,27 +22,12 @@ export default class GameScene extends Phaser.Scene {
 
   setWarriorScorePoints(points) {
     this.warrior.points += points;
-    this.statusText.setText(`score: ${this.warrior.points}`);
+    Doman.setText(this.statusText, `score: ${this.warrior.points}`);
   }
 
   setWarriorHP(points) {
     this.warrior.hp = points;
-    this.hpText.setText(`hp: ${this.warrior.hp}`);
-  }
-
-  createPanels(x, y, w, h) {
-    this.graphics = this.add.graphics();
-    this.graphics.lineStyle(1, 0xffffff);
-    this.graphics.fillStyle(0x031f4c, 1);
-
-    this.graphics.strokeRect(x, y, w, h);
-    this.graphics.fillRect(x, y, w, h);
-    this.graphics.strokeRect(x + w, y, w, h);
-    this.graphics.fillRect(x + w, y, w, h);
-    this.graphics.strokeRect(x + (2 * w), y, w, h);
-    this.graphics.fillRect(x + (2 * w), y, w, h);
-
-    return this.graphics;
+    Doman.setText(this.hpText, `hp: ${this.warrior.hp}`);
   }
 
   create(data) {
@@ -134,25 +123,14 @@ export default class GameScene extends Phaser.Scene {
 
     this.sys.events.on('wake', this.wake, this);
 
-    this.status = this.add.rectangle(25, 250, 70, 30, '#ffffff').setOrigin(0, 0);
-    this.statusText = this.add.text(25, 250, 'score: 0', { color: 'white', fontSize: '9px' });
-    this.hpText = this.add.text(25, 250, 'hp: 100', { color: 'white', fontSize: '9px' });
+    Doman.createStatusCard(this);
 
     this.events.on('update score points', this.setWarriorScorePoints, this);
     this.events.on('food collected', this.checkWin, this);
   }
 
   collectFood(_player, food2) {
-    this.food.removeTileAt(food2.x + 1, food2.y - 1);
-    this.food.removeTileAt(food2.x - 1, food2.y + 1);
-    this.food.removeTileAt(food2.x - 1, food2.y - 1);
-    this.food.removeTileAt(food2.x, food2.y - 1);
-    this.food.removeTileAt(food2.x - 1, food2.y);
-    this.food.removeTileAt(food2.x, food2.y);
-    this.food.removeTileAt(food2.x, food2.y + 1);
-    this.food.removeTileAt(food2.x + 1, food2.y);
-    this.food.removeTileAt(food2.x + 1, food2.y + 1);
-
+    Doman.removeTile(this.food, food2);
     this.warrior.foodsCollected += 1;
 
     this.events.emit('food collected');
@@ -203,15 +181,23 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.stop();
     }
 
-    this.status.setPosition(this.player.getBounds().x - 4, this.player.getBounds().y - 35);
-    this.statusText.setPosition(this.player.getBounds().x - 3, this.player.getBounds().y - 34);
-    this.hpText.setPosition(this.player.getBounds().x - 3, this.player.getBounds().y - 25);
+    Doman.setAssetPosition(this.status, this.player.getBounds().x - 4,
+      this.player.getBounds().y - 35);
+    Doman.setAssetPosition(this.statusText, this.player.getBounds().x - 3,
+      this.player.getBounds().y - 34);
+    Doman.setAssetPosition(this.hpText, this.player.getBounds().x - 3,
+      this.player.getBounds().y - 25);
   }
 
   checkWin() {
-    const { foodsCollected } = this.getWarriorData();
+    const {
+      foodsCollected,
+    } = this.getWarriorData();
     if (foodsCollected === 3) {
-      this.scene.start('GameFinished', { name: this.warrior.name, score: this.warrior.points });
+      this.scene.start('GameFinished', {
+        name: this.warrior.name,
+        score: this.warrior.points,
+      });
     }
   }
 }

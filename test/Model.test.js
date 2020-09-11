@@ -1,7 +1,7 @@
-import Model from './../src/Model';
+import Model from '../src/Model';
 
 describe('Model tests', () => {
-  let model = new Model();
+  const model = new Model();
 
   it('sets the music on', () => {
     model.musicOn = true;
@@ -32,5 +32,4 @@ describe('Model tests', () => {
     model.bgMusicPlaying = false;
     expect(model.bgMusicPlaying).toBe(false);
   });
- 
 });
